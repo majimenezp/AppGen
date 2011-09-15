@@ -69,6 +69,9 @@
     <Compile Include="Views\ViewsGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\Assets\js\common.js" />
+    <Content Include="Templates\Assets\js\jquery-1.6.2.min-vsdoc.js" />
+    <Content Include="Templates\Assets\js\jquery-1.6.2.min.js" />
     <Content Include="Templates\Models\model.tt">
       <LastGenOutput>model.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -84,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\Views\simpleview.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>simpleview.cshtml</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -101,6 +103,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Templates\Views\scaffold\Index.tt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Views\scaffold\Edit.tt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Views\scaffold\New.tt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Controllers\assets.tt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Views\scaffold\_form.tt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

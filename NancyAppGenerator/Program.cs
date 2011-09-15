@@ -125,7 +125,9 @@ namespace NancyAppGenerator
              List<Controllers.ActionDefinition> actions=new List<Controllers.ActionDefinition>();
              Controllers.ControllerGenerator generator = new Controllers.ControllerGenerator(currentPath, actions, model.Name);
              VerifyControllersFolder(currentPath);
-             VerifyControllerSubFolder(currentPath, model.Name);
+             VerifyAssetsController(currentPath);
+             //VerifyControllerSubFolder(currentPath, model.Name);
+             VerifyAssetsFolder(currentPath);
              generator.GenerateScaffoldClass(model);
              VerifyViewSubFolder(currentPath, model.Name);
              VerifiViewLayout(currentPath);
@@ -160,9 +162,7 @@ namespace NancyAppGenerator
             {
                 Directory.CreateDirectory(Path.Combine(currentPath, "Controllers", className));
             }
-        }
-
-        
+        }        
 
         private static void GenerateFolderStruct(string currentPath)
         {
@@ -200,6 +200,36 @@ namespace NancyAppGenerator
             if (!Directory.Exists(Path.Combine(currentPath, "Models")))
             {
                 Directory.CreateDirectory(Path.Combine(currentPath, "Models"));
+            }
+        }
+
+        private static void VerifyAssetsFolder(string currentPath)
+        {
+            if (!Directory.Exists(Path.Combine(currentPath, "Assets")))
+            {
+                Directory.CreateDirectory(Path.Combine(currentPath, "Assets"));
+            }
+            if (!Directory.Exists(Path.Combine(currentPath, "Assets","js")))
+            {
+                Directory.CreateDirectory(Path.Combine(currentPath, "Assets","js"));
+            }
+            if (!Directory.Exists(Path.Combine(currentPath, "Assets", "img")))
+            {
+                Directory.CreateDirectory(Path.Combine(currentPath, "Assets", "img"));
+            }
+            if (!Directory.Exists(Path.Combine(currentPath, "Assets", "css")))
+            {
+                Directory.CreateDirectory(Path.Combine(currentPath, "Assets", "css"));
+            }
+        }
+
+        private static void VerifyAssetsController(string currentPath)
+        {
+            VerifyControllersFolder(currentPath);
+            if (!File.Exists(Path.Combine(currentPath, "Controller","AssetsController.cs")))
+            {
+                Controllers.ControllerGenerator generator = new Controllers.ControllerGenerator(currentPath);
+                generator.GenerateAssetClass();
             }
         }
     }

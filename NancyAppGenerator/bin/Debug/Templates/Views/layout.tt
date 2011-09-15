@@ -11,6 +11,7 @@
 <head>
   <title>App01</title>
   @RenderSection("css",required:false)
+  <script type="text/javascript" language="javascript" src="/js/jquery-1.6.2.min.js"></script>
   @RenderSection("scripts",required:false)
 </head>
 <body>

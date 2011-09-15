@@ -1,0 +1,31 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cs" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.ControllerHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+using System;
+using Nancy;
+namespace <#=Model.NameSpace#>.Controllers
+{
+	public class AssetsController:NancyModule
+	{
+		public AssetsController()
+		{
+			 Get["/img/{file}"] = x =>
+			{
+				return Response.AsImage("Assets/img/" + (string)x.file);
+			};
+			Get["/css/{file}"] = x =>
+			{
+				return Response.AsCss("Assets/css/" + (string)x.file);
+			};
+			Get["/js/{file}"] = x =>
+			{
+				return Response.AsJs("Assets/js/" + (string)x.file);
+			};
+		}
+	}
+}

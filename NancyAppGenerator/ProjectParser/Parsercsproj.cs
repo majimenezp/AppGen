@@ -9,7 +9,7 @@ namespace NancyAppGenerator.ProjectParser
     class Parsercsproj
     {
         string FilePath;
-        XDocument projDefinition;
+        static XDocument projDefinition;
         XNamespace msbuild;
         int changes = 0;
         public Parsercsproj(string currentPath)
@@ -41,6 +41,15 @@ namespace NancyAppGenerator.ProjectParser
                .Elements(msbuild + "Compile")
                .Attributes("Include")
                .Where(x => x.Value == fileName).Count() > 0;
+            var test1 = projDefinition
+                    .Element(msbuild + "Project")
+                    .Elements(msbuild + "ItemGroup")
+                    .Elements(msbuild + "Compile")
+                    .Last();
+            var test2 = projDefinition
+                    .Element(msbuild + "Project")
+                    .Elements(msbuild + "ItemGroup")
+                    .Elements(msbuild + "Compile");
             if (!Exist)
             {
                 XElement elem = new XElement(msbuild + "Compile");
@@ -92,8 +101,7 @@ namespace NancyAppGenerator.ProjectParser
                 projDefinition = XDocument.Load(arch);
                 arch.Close();
             }
-            changes = 0;
-            
+            changes = 0;            
         }
 
     }

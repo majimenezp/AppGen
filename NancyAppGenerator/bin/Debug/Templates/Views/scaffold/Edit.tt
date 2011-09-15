@@ -1,0 +1,12 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cshtml" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.ScaffoldViewHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("_form",Model)

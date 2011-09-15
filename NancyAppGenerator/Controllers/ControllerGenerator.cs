@@ -19,9 +19,15 @@ namespace NancyAppGenerator.Controllers
         private string currentPath;
         public ControllerGenerator(string currentPath, List<ActionDefinition> actions, string className)
         {
-            // TODO: Complete member initialization
             this.actions = actions;
             this.className = className;
+            this.currentPath = currentPath;
+            parseproj = new Parsercsproj(currentPath);
+        }
+        public ControllerGenerator(string currentPath)
+        {
+            this.actions = new List<ActionDefinition>();
+            this.className = string.Empty;
             this.currentPath = currentPath;
             parseproj = new Parsercsproj(currentPath);
         }
@@ -33,9 +39,9 @@ namespace NancyAppGenerator.Controllers
             host.Actions = actions;
             host.NameSpace = parseproj.RootNameSpace;
             string output = host.ProcessTemplate();
-            string filePath = Path.Combine(currentPath, "Controllers",className, className + ".cs");
+            string filePath = Path.Combine(currentPath, "Controllers", className + ".cs");
             File.WriteAllText(filePath, output, Encoding.UTF8);
-            parseproj.AddCompileFile("Controllers\\"+className +"\\"+ className + ".cs");
+            parseproj.AddCompileFile("Controllers\\" + className + ".cs");
             parseproj.Save();            
         }
         internal void GenerateScaffoldClass(Models.ModelDefinition model)
@@ -45,9 +51,9 @@ namespace NancyAppGenerator.Controllers
             host.Model = model;
             host.NameSpace = parseproj.RootNameSpace; ;
             string output = host.ProcessTemplate();
-            string filePath = Path.Combine(currentPath, "Controllers", className, className + ".cs");
+            string filePath = Path.Combine(currentPath, "Controllers", className + ".cs");
             File.WriteAllText(filePath, output, Encoding.UTF8);
-            parseproj.AddCompileFile("Controllers\\" + className + "\\" + className + ".cs");
+            parseproj.AddCompileFile("Controllers\\"  + className + ".cs");
             parseproj.Save();            
         }
 
@@ -66,20 +72,42 @@ namespace NancyAppGenerator.Controllers
             }
             parseproj.Save();
         }
+
         internal void GenerateScaffoldViews(Models.ModelDefinition model)
+        {
+            CreateScaffoldView(model, "Index", "Index.tt");
+            CreateScaffoldView(model, "New", "New.tt");
+            CreateScaffoldView(model, "Edit", "Edit.tt");
+            CreateScaffoldView(model, "_form", "_form.tt");
+            parseproj.Save();
+        }
+
+        private void CreateScaffoldView(Models.ModelDefinition model,string ViewName,string TemplateName)
         {
             ScaffoldViewHost host = new ScaffoldViewHost();
             host.BaseName = className;
-            host.ViewName = "Index";
-            host.Template = "Index.tt";
+            host.ViewName = ViewName;
+            host.Template = TemplateName;
             host.Model = model;
             string output = host.ProcessTemplate();
-            string filePath = Path.Combine(currentPath, "Views", className, "Index.cshtml");
+            string filePath = Path.Combine(currentPath, "Views", className, ViewName+".cshtml");
             File.WriteAllText(filePath, output, Encoding.UTF8);
-            parseproj.AddContentFile("Views\\" + className + "\\" + "Index.cshtml", CopyOutPutOptions.PreserveNewest);
+            parseproj.AddContentFile("Views\\" + className + "\\" + ViewName+".cshtml", CopyOutPutOptions.PreserveNewest);
+        }
 
-
-            parseproj.Save();
+        internal void GenerateAssetClass()
+        {
+            ControllerHost host = new ControllerHost();
+            host.Template = "assets.tt";
+            host.NameSpace = parseproj.RootNameSpace;            
+            string filePath = Path.Combine(currentPath, "Controllers", "AssetsController.cs");
+            if (!File.Exists(filePath))
+            {
+                string output = host.ProcessTemplate();
+                File.WriteAllText(filePath, output, Encoding.UTF8);
+                parseproj.AddCompileFile("Controllers\\AssetsController.cs");
+                parseproj.Save();
+            }
         }
     }
 }
