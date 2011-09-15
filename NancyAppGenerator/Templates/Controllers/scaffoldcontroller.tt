@@ -1,0 +1,85 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cs" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.ScaffoldControllerHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+using System;
+using Nancy;
+using <#=Model.NameSpace#>.Models;
+namespace <#=Model.NameSpace#>.Controllers
+{
+	public class <#=Model.ClassName#>Controller:NancyModule
+	{
+		public <#=Model.ClassName #>Controller():base("/<#=Model.ClassName#>")
+		{
+			Get["/"]=x=>
+			{
+				var model=new {Tittle="All records",Records=<#=Model.ClassName#>.All()};
+				return View["Views/<#=Model.ClassName#>/Index.cshtml",model];
+			};
+
+			Get["/New"]=x=>
+			{
+				var record=new <#=Model.ClassName#>();
+				var model=new {Tittle="New record",Record=record,Action="/<#=Model.ClassName#>/New"};
+				return View["Views/<#=Model.ClassName#>/New.cshtml",model];
+			};
+
+			Post["/New"]=x=>
+			{
+				var record=new <#=Model.ClassName#>();
+<#foreach (var field in Model.Model.Fields){ #>
+				record.<#= field.Name#>=Request.Form.<#=field.Name #>;
+<#}#>
+				if (record.Save())
+				{
+					var model=new {Tittle="All records",Records=<#=Model.ClassName#>.All(),Message="Record was sucessfully created."};
+					return View["Views/<#=Model.ClassName#>/Index.cshtml",model];
+				}
+				else
+				{
+					var model=new {Tittle="New record",Record=record,Message="An error ocurs during saving.",Action="/<#=Model.ClassName#>/New"};
+					return View["Views/<#=Model.ClassName#>/New.cshtml",model];					
+				}
+			};
+
+			Get["/Edit/{Id}"]=x=>
+			{
+				var Idrecord=x.Id;
+				var record=<#=Model.ClassName#>.FindById(Idrecord);
+				var model=new { Tittle = "Edit record", Record = record, action = "/<#=Model.ClassName#>/Edit/", Method = "PUT" };
+				return View["Views/<#=Model.ClassName#>/Edit.cshtml", model];
+			};
+
+			Put["/Edit/"]=x=>
+			{
+				var Idrecord=x.Id;
+				var record=<#=Model.ClassName#>.FindById(Idrecord);
+				<#foreach (var field in Model.Model.Fields){ #>
+				record.<#= field.Name#>=Request.Form.<#=field.Name #>;
+<#}#>
+				if(record.Save())
+				{
+					var model=new {Tittle="All records",Records=<#=Model.ClassName#>.All(),Message="Record was sucessfully updated."};
+					return View["Views/<#=Model.ClassName#>/Index.cshtml",model];
+				}
+				else
+				{
+					var model=new {Tittle="Edit record",Record=record,Message="An error ocurs during saving.", action = "/<#=Model.ClassName#>/Edit/", Method = "PUT" };
+					return View["Views/<#=Model.ClassName#>/Edit.cshtml",model];					
+				}
+			};
+
+			Delete["/Delete/{Id}"]=x=>
+			{
+				var Idrecord=x.Id;
+				var record=<#=Model.ClassName#>.FindById(Idrecord);
+				record.Delete();
+				return Response.AsRedirect("/<#=Model.ClassName#>");
+			};
+		}
+	}
+}

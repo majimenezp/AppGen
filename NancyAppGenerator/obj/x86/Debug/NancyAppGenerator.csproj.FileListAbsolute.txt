@@ -1,0 +1,12 @@
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Appgen.exe
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Appgen.pdb
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\obj\x86\Debug\Appgen.exe
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\obj\x86\Debug\Appgen.pdb
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Mono.TextTemplating.dll
+c:\users\majimenezp\documents\visual studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Models\model.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Controllers\controller.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Views\simpleview.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Views\layout.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Controllers\scaffoldcontroller.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Views\scaffold\Index.tt

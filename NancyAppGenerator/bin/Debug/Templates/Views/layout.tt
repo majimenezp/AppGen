@@ -1,0 +1,25 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cshtml" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.LayoutViewHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App01</title>
+  @RenderSection("css",required:false)
+  @RenderSection("scripts",required:false)
+</head>
+<body>
+	<div id="header">
+	</div>
+	<div id="body">
+	@RenderBody()
+	</div>
+	<div id="footer">
+	</div>
+</body>
+</html>

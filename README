@@ -1,0 +1,32 @@
+The main idea it's create a command line application that generate code and html files similar as how ruby on rails works.
+Now only support the razor view engine in Nancy
+This is a work in progress you can try with this commands:
+
+*In the command line, located in the project folder*
+
+appgen struct 
+Generate all the folder structure for a Nancy web application (Views,Controllers, shared folders), now the assets with js,img and css are missing,need to add.
+
+
+appgen generate controller {controllerName} {action1} {action2} {action3}
+
+Generate a controller with the name {controllerName} and with the actions named {action1},{action2},{action3}, also generate the cshtml views.
+Example:
+appgen generate Greetings hello bye
+
+appgen generate model {ModelName} {fieldName:type} {fieldName:type} {fieldName:type}
+Generate a model class with the name {ModelName} and the field defined with {fieldName:type}
+Example:
+appgen generate model Person Id:integer Name:string BirthDate:datetime status:bool
+
+appgen generate scaffold {ModelName} {fieldName:type} {fieldName:type}
+Generate a model class with the name {ModelName} and the field defined with {fieldName:type} and generate a controller with the actions and view to do all the CRUD for the model (Index,New,Edit,Delete)
+Example:
+appgen generate scaffold Person Id:integer Name:string BirthDate:datetime status:bool
+
+TODO:
+*The scaffold generator now only generate the index logic, i need will add this feature soon
+*The commands where the model generation it's involved, i need to add a migration class, i will use fluent migration for this
+*I need to add jquery, css and all additional assets to make a complete web app
+*Create the database bindings using Simple.Data to complain with de Super Duper Happy Path
+

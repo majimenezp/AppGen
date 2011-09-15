@@ -1,0 +1,13 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cshtml" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.SimpleViewHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+
+<h1><#=Model.BaseName #> view for action <#=Model.ViewName #> </h1>

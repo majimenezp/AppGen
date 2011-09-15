@@ -1,0 +1,26 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cs" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.ControllerHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+using System;
+using Nancy;
+using <#=Model.NameSpace#>.Models;
+namespace <#=Model.NameSpace#>.Controllers
+{
+	public class <#=Model.ClassName#>Controller:NancyModule
+	{
+		public <#=Model.ClassName#>Controller():base("/<#=Model.ClassName #>")
+		{
+<# foreach (var action in Model.Actions) {  #>
+		<#=action.HttpMethod.ToString()#>["/<#=action.Route#>"]=x=>
+		{
+			return View["Views/<#=Model.ClassName #>/<#=action.View#>.cshtml"];
+		};
+<#}#>
+		}
+	}
+}

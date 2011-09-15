@@ -1,0 +1,39 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cshtml" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.ScaffoldViewHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript" language="javascript" src="/js/common.js"></script>
+}
+<h2>List</h2>
+<a href="/<#=Model.BaseName#>/New">Add new record...</a>
+<table cellpadding="4" cellspacing="0" class="list">
+<thead>
+<tr>
+<#foreach (var field in Model.Model.Fields){ #>
+    <td><#=field.Name #></td>
+<#}#>
+</tr>
+</thead>
+<tbody>
+@foreach (var item in Model.Records)
+{
+    <tr>
+<#foreach (var field in Model.Model.Fields){ #>
+	<td>@item.<#=field.Name#></td>
+<#}#>
+        <td>
+        <a href="/<#=Model.BaseName#>/Edit/@item.Id/">Edit</a> |
+         <a href="/<#=Model.BaseName#>/Delete/@item.Id/" data-confirm="Are you sure?" data-method="delete">Delete</a>
+        </td>
+    </tr>
+}
+</tbody>
+</table>

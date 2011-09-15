@@ -1,0 +1,31 @@
+<#@ template language="C#" Hostspecific="True" #>
+<#@ Output Extension="cs" #>
+<#
+	var Model = (NancyAppGenerator.TemplateHosts.ModelHost)Host;
+#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="NancyAppGenerator.TemplateHosts" #>
+using System;
+using System.Collections.Generic;
+namespace <#=Model.NameSpace  #>
+{
+	public class <#=Model.ClassName #>
+	{
+<# foreach (var property in Model.ClassFields) {  #>
+		public <#= property.ShortName #> <#= property.Name #> {get;set;}
+<#}#>
+		public static List<<#=Model.ClassName#>> All()
+		{
+			return new List<<#= Model.ClassName#>>();
+		}
+		public bool Save()
+		{
+			return true;
+		}
+		public static <#= Model.ClassName#> FindById(<#= Model.IdField.SystemType.Name#> Id)
+		{
+			return new <#= Model.ClassName#>();
+		}
+	}
+}
