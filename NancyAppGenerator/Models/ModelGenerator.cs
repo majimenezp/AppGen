@@ -30,12 +30,14 @@ namespace NancyAppGenerator.Models
             if (classFields.Where(x=>x.ToLower().Contains("id")).Count()==0)
             {
                 // add an Id field for default identifier
-                fields.Add(new ClassField() { Name = "Id", SystemType = typeof(int), TypeClass = "integer" });
+                var idfield=new ClassField() { Name = "Id", TypeClass = "integer", PrimaryKey=true };
+                ParseType(idfield);
+                fields.Add(idfield);                
             }
             foreach (string field in classFields)
             {
                 string[] parts = field.Split(':');
-                var tmpfield=new ClassField() { Name = parts[0], TypeClass = parts[1] };
+                var tmpfield=new ClassField() { Name = parts[0], TypeClass = parts[1] ,PrimaryKey=parts[0].Equals("id", StringComparison.InvariantCultureIgnoreCase)?true:false};
                 ParseType(tmpfield);
                 fields.Add(tmpfield);
             }            
@@ -48,23 +50,39 @@ namespace NancyAppGenerator.Models
             {
                 case "integer":
                     tmpfield.SystemType = typeof(int);
+                    tmpfield.MigrationColSyntax = "AsInt32()";
+                    break;
+                case "binary":
+                case "bytes":
+                case "blob":
+                    tmpfield.SystemType = typeof(byte[]);
+                    tmpfield.MigrationColSyntax = "AsBinary()";
+                    break;
+                case "guid":
+                        tmpfield.SystemType = typeof(Guid);
+                        tmpfield.MigrationColSyntax = "AsGuid()";
                     break;
                 case "decimal":
                     tmpfield.SystemType = typeof(decimal);
+                    tmpfield.MigrationColSyntax = "AsDecimal()";
                     break;
                 case "double":
                     tmpfield.SystemType = typeof(double);
+                    tmpfield.MigrationColSyntax = "AsDouble()";
                     break;
                 case "string":
                     tmpfield.SystemType = typeof(string);
+                    tmpfield.MigrationColSyntax = "AsString()";
                     break;
                 case "date":
                 case "datetime":
                     tmpfield.SystemType = typeof(DateTime);
+                    tmpfield.MigrationColSyntax = "AsDateTime()";
                     break;
                 case "bool":
                 case "boolean":
                     tmpfield.SystemType = typeof(bool);
+                    tmpfield.MigrationColSyntax = "AsBoolean()";                    
                     break;
                 
             }
@@ -83,6 +101,24 @@ namespace NancyAppGenerator.Models
             File.WriteAllText(filePath, output,Encoding.UTF8);
             parseproj.AddCompileFile("Models\\" + className + ".cs");
             parseproj.Save();
+            GenerateMigrationClass(currentPath);
+        }
+
+        private void GenerateMigrationClass(string currentPath)
+        {
+            MigrationHost host = new MigrationHost();
+            Parsercsproj parseproj = new Parsercsproj(currentPath);
+            host.ClassName = className;
+            host.ClassFields = fields;
+            host.MigrationSet=DateTime.Now.ToString("yyyyMMddHHmmss");
+            host.IdField = fields.FirstOrDefault(x => x.Name.Equals("id", StringComparison.InvariantCultureIgnoreCase));
+            host.NameSpace = parseproj.RootNameSpace + ".Migrations";
+            string output = host.ProcessTemplate();
+            string filePath = Path.Combine(currentPath, "Migrations", "create"+className + ".cs");
+            File.WriteAllText(filePath, output, Encoding.UTF8);
+            parseproj.AddCompileFile("Migrations\\create" + className + ".cs");
+            parseproj.Save();
+            
         }
     }
 }

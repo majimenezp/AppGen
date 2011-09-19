@@ -14,3 +14,15 @@ C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\Nanc
 C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Views\scaffold\New.tt
 C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Controllers\assets.tt
 C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Views\scaffold\_form.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Assets\js\common.js
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Assets\js\jquery-1.6.2.min-vsdoc.js
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Assets\js\jquery-1.6.2.min.js
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Assets\css\style.css
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Templates\Migrations\create.tt
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\FluentMigrator.dll
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Mono.CSharp.dll
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\FluentMigrator.Runner.dll
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\FluentMigrator.Runner.pdb
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\Appgen.exe.config
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\MonoDevelop.TextTemplating.dll
+C:\Users\majimenezp\Documents\Visual Studio 2010\Projects\NancyAppGenerator\NancyAppGenerator\bin\Debug\FluentMigrator.pdb

@@ -34,8 +34,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.TextTemplating">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MonoDevelop\AddIns\MonoDevelop.TextTemplating\Mono.TextTemplating.dll</HintPath>
+    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\Libs\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\Libs\Mono.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.TextTemplating, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Libs\Mono.TextTemplating.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoDevelop.TextTemplating">
+      <HintPath>..\Libs\MonoDevelop.TextTemplating.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +63,8 @@
     <Compile Include="Controllers\ControllerGenerator.cs" />
     <Compile Include="Controllers\HTTPVerbs.cs" />
     <Compile Include="CustomCmdLineHost.cs" />
+    <Compile Include="MigrationCompiler.cs" />
+    <Compile Include="MigratorExecuter.cs" />
     <Compile Include="Models\ClassField.cs" />
     <Compile Include="Models\ModelDefinition.cs" />
     <Compile Include="Models\ModelGenerator.cs" />
@@ -57,8 +72,14 @@
     <Compile Include="ProjectParser\CopyOutPutEnum.cs" />
     <Compile Include="ProjectParser\Parsercsproj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="TemplateHost.cs" />
     <Compile Include="TemplateHosts\ControllerHost.cs" />
+    <Compile Include="TemplateHosts\MigrationHost.cs" />
     <Compile Include="TemplateHosts\ScaffoldViewHost.cs" />
     <Compile Include="TemplateHosts\ScaffoldControllerHost.cs" />
     <Compile Include="TemplateHosts\LayoutViewHost.cs" />
@@ -69,9 +90,18 @@
     <Compile Include="Views\ViewsGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\Assets\js\common.js" />
-    <Content Include="Templates\Assets\js\jquery-1.6.2.min-vsdoc.js" />
-    <Content Include="Templates\Assets\js\jquery-1.6.2.min.js" />
+    <Content Include="Templates\Assets\css\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Assets\js\common.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Assets\js\jquery-1.6.2.min-vsdoc.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Assets\js\jquery-1.6.2.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Models\model.tt">
       <LastGenOutput>model.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -125,6 +155,19 @@
     <Content Include="Templates\Views\scaffold\_form.tt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Templates\Migrations\create.tt">
+      <LastGenOutput>model.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

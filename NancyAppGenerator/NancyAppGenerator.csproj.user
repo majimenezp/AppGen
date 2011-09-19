@@ -2,6 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <StartWorkingDirectory>C:\Users\majimenezp\Documents\Tutoriales\Taller unacar\Ejemplos Terminados\EjemploNuget\EjemploNuget\</StartWorkingDirectory>
-    <StartArguments>generate scaffold Modelo02 nombre:string edad:integer fechanacimiento:datetime</StartArguments>
+    <StartArguments>migrate db:sqlite conn:"data source=localdb.sqlite"</StartArguments>
   </PropertyGroup>
 </Project>
